@@ -1,6 +1,6 @@
-FROM nginx:1.27-alpine
+FROM php:8.3-apache
 
-COPY index.html /usr/share/nginx/html/index.html
-COPY styles.css /usr/share/nginx/html/styles.css
+COPY index.php /var/www/html/index.php
+COPY styles.css /var/www/html/styles.css
 
 EXPOSE 80

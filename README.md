@@ -1,10 +1,13 @@
 # CV con CI/CD
 
-Proyecto de CV estatico desplegado con Docker, Jenkins, GitHub, Cloudflare e ImageKit.
+## Descripcion
+
+Proyecto de CV en PHP desplegado con Apache, Docker, Jenkins, GitHub, Cloudflare e ImageKit. El entorno simula una Raspberry Pi usando un contenedor Docker-in-Docker llamado `raspberry-docker`.
 
 ## Tecnologias
 
-- HTML y CSS
+- PHP, HTML y CSS
+- Apache
 - Docker y Docker Compose
 - Jenkins Pipeline
 - GitHub Actions
@@ -14,14 +17,25 @@ Proyecto de CV estatico desplegado con Docker, Jenkins, GitHub, Cloudflare e Ima
 ## Instalacion local
 
 ```bash
-docker build -t cv-web .
-docker run -d --name cv-web -p 8081:80 cv-web
+docker build -t cv-apache .
+docker run -d --name cv-apache -p 8081:80 cv-apache
 ```
 
 Abrir:
 
 ```text
 http://localhost:8081
+```
+
+## Variables
+
+El `Jenkinsfile` usa estas variables:
+
+```text
+IMAGE_NAME=cv-apache
+CONTAINER_NAME=cv-apache
+HOST_PORT=8081
+DOCKER_HOST=tcp://raspberry-docker:2375
 ```
 
 ## Jenkins en Docker simulando una Raspberry
@@ -51,13 +65,13 @@ docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 
 Instalar los plugins recomendados y crear un usuario administrador.
 
-## Pipeline CI/CD
+## CI/CD
 
 El archivo `Jenkinsfile` define tres fases y usa `DOCKER_HOST=tcp://raspberry-docker:2375` para desplegar dentro del contenedor que simula la Raspberry:
 
-1. `Checkout`: descarga el codigo desde GitHub.
-2. `Build Docker image`: construye la imagen `cv-web`.
-3. `Deploy`: sustituye el contenedor anterior y publica el CV en el puerto `8081`.
+1. `Descargar código`: descarga el codigo desde GitHub.
+2. `Validar PHP`: ejecuta `php -l index.php`.
+3. `Desplegar en Apache`: construye la imagen Apache/PHP y publica el CV en el puerto `8081`.
 
 Crear en Jenkins un job de tipo `Pipeline` o `Multibranch Pipeline` y apuntarlo al repositorio de GitHub.
 
@@ -120,6 +134,10 @@ Pasos del workflow:
 3. Comprueba que existen los archivos principales del proyecto.
 
 En este proyecto el despliegue automatico real lo hace Jenkins. GitHub Actions queda como validacion adicional del repositorio.
+
+## Autor
+
+Anas Kharbouch
 
 ## Entrega
 

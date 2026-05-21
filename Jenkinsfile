@@ -2,28 +2,29 @@ pipeline {
   agent any
 
   environment {
-    IMAGE_NAME = 'cv-web'
-    CONTAINER_NAME = 'cv-web'
+    IMAGE_NAME = 'cv-apache'
+    CONTAINER_NAME = 'cv-apache'
     HOST_PORT = '8081'
     DOCKER_HOST = 'tcp://raspberry-docker:2375'
   }
 
   stages {
-    stage('Checkout') {
+    stage('Descargar código') {
       steps {
         checkout scm
       }
     }
 
-    stage('Build Docker image') {
+    stage('Validar PHP') {
       steps {
-        sh 'docker build -t ${IMAGE_NAME}:latest .'
+        sh 'docker run --rm -i php:8.3-cli php -l < index.php'
       }
     }
 
-    stage('Deploy') {
+    stage('Desplegar en Apache') {
       steps {
         sh '''
+          docker build -t ${IMAGE_NAME}:latest .
           docker rm -f ${CONTAINER_NAME} || true
           docker run -d \
             --name ${CONTAINER_NAME} \
@@ -37,7 +38,7 @@ pipeline {
 
   post {
     success {
-      echo 'Despliegue completado: http://localhost:8081'
+      echo 'Despliegue completado en Apache: http://localhost:8081'
     }
   }
 }
