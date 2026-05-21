@@ -155,7 +155,11 @@ Incluir:
 
 URL: <https://github.com/anaskha7/CI-CD>
 
-![Repositorio GitHub](entrega/github-repositorio.png)
+<img
+  src="https://raw.githubusercontent.com/anaskha7/CI-CD/main/entrega/github-repositorio.png"
+  alt="Repositorio GitHub"
+  width="900"
+/>
 
 ### CV funcionando en Apache
 
@@ -165,7 +169,11 @@ Entorno local de pruebas:
 http://localhost:8081
 ```
 
-![CV en Apache](entrega/cv-localhost-8081.png)
+<img
+  src="https://raw.githubusercontent.com/anaskha7/CI-CD/main/entrega/cv-localhost-8081.png"
+  alt="CV en Apache"
+  width="900"
+/>
 
 Cabeceras guardadas en:
 
