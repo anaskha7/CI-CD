@@ -5,6 +5,7 @@ pipeline {
     IMAGE_NAME = 'cv-web'
     CONTAINER_NAME = 'cv-web'
     HOST_PORT = '8081'
+    DOCKER_HOST = 'tcp://raspberry-docker:2375'
   }
 
   stages {
@@ -36,7 +37,7 @@ pipeline {
 
   post {
     success {
-      echo 'Despliegue completado: http://IP_RASPBERRY:8081'
+      echo 'Despliegue completado: http://localhost:8081'
     }
   }
 }

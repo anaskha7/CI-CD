@@ -24,9 +24,14 @@ Abrir:
 http://localhost:8081
 ```
 
-## Jenkins en Docker
+## Jenkins en Docker simulando una Raspberry
 
-Levantar Jenkins:
+Como no se usa una Raspberry real, `docker-compose.yml` crea dos contenedores:
+
+- `jenkins`: servidor Jenkins.
+- `raspberry-docker`: Docker-in-Docker que simula la Raspberry donde se despliega el CV.
+
+Levantar el entorno:
 
 ```bash
 docker compose up -d
@@ -35,7 +40,7 @@ docker compose up -d
 Entrar en:
 
 ```text
-http://IP_RASPBERRY:8080
+http://localhost:8085
 ```
 
 Obtener la contrasena inicial:
@@ -48,7 +53,7 @@ Instalar los plugins recomendados y crear un usuario administrador.
 
 ## Pipeline CI/CD
 
-El archivo `Jenkinsfile` define tres fases:
+El archivo `Jenkinsfile` define tres fases y usa `DOCKER_HOST=tcp://raspberry-docker:2375` para desplegar dentro del contenedor que simula la Raspberry:
 
 1. `Checkout`: descarga el codigo desde GitHub.
 2. `Build Docker image`: construye la imagen `cv-web`.
@@ -58,8 +63,8 @@ Crear en Jenkins un job de tipo `Pipeline` o `Multibranch Pipeline` y apuntarlo 
 
 Para automatizar ejecuciones:
 
-- Opcion recomendada: configurar un Webhook en GitHub hacia `http://IP_RASPBERRY:8080/github-webhook/`.
-- Opcion alternativa: activar `Poll SCM` en Jenkins con una expresion como `H/5 * * * *`.
+- Opcion local recomendada: activar `Poll SCM` en Jenkins con una expresion como `H/5 * * * *`.
+- Opcion con webhook: usar un tunel publico, por ejemplo ngrok o Cloudflare Tunnel, hacia `http://localhost:8085/github-webhook/`.
 
 Despues de hacer:
 
@@ -72,7 +77,7 @@ git push
 Jenkins debe ejecutar el pipeline y desplegar automaticamente en:
 
 ```text
-http://IP_RASPBERRY:8081
+http://localhost:8081
 ```
 
 ## Cloudflare
