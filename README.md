@@ -95,15 +95,11 @@ http://localhost:8081
 
 ## ImageKit
 
-1. Subir la foto del CV a ImageKit.
-2. Copiar la URL generada.
-3. Sustituir en `index.html`:
+La foto del CV usa una imagen publica de ImageKit con transformacion WebP:
 
 ```html
-src="https://ik.imagekit.io/TU_IMAGEKIT_ID/cv/foto-cv.jpg?tr=f-webp,w-320,q-85"
+src="https://ik.imagekit.io/demo/img/image1.jpeg?tr=f-webp,w-320,q-85"
 ```
-
-Por la URL real de ImageKit.
 
 Para verificarlo:
 
