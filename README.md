@@ -148,3 +148,40 @@ Incluir:
 - Captura de Cloudflare con DNS/proxy activo.
 - URL del CV funcionando por HTTPS.
 - `README.md` y `reflexion.md`.
+
+## Evidencias
+
+### Repositorio GitHub
+
+URL: <https://github.com/anaskha7/CI-CD>
+
+![Repositorio GitHub](entrega/github-repositorio.png)
+
+### CV funcionando en Apache
+
+Entorno local de pruebas:
+
+```text
+http://localhost:8081
+```
+
+![CV en Apache](entrega/cv-localhost-8081.png)
+
+Cabeceras guardadas en:
+
+- [CV Apache](entrega/cv-apache-headers.txt)
+- [ImageKit WebP](entrega/imagekit-webp-headers.txt)
+
+### Jenkins
+
+El pipeline esta configurado en `Jenkinsfile` con las tres etapas pedidas:
+
+1. `Descargar código`
+2. `Validar PHP`
+3. `Desplegar en Apache`
+
+La captura final debe hacerse desde Jenkins cuando el job `ci-cd-cv` termine en verde. Jenkins requiere sesion iniciada, por eso no se incluye una captura automatica desde fuera de la sesion.
+
+### Cloudflare y HTTPS
+
+Pendiente de dominio real. Para completar esta parte hay que configurar el dominio en Cloudflare, activar la nube naranja en DNS y verificar que el CV abre por HTTPS con candado.

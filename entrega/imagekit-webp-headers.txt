@@ -1,0 +1,20 @@
+HTTP/2 200 
+content-type: image/webp
+content-length: 12482
+access-control-allow-origin: *
+access-control-allow-methods: GET
+access-control-allow-headers: *
+timing-allow-origin: *
+x-server: ImageKit.io
+x-request-id: a51f1e6c-1fc4-9569-b882-f76c9bd69679
+cache-control: public, s-maxage=31536000, max-age=31536000, must-revalidate
+etag: W/"30c2-1g9OWxrDAV8F8g2HMmY2dAo/x9w"
+date: Thu, 21 May 2026 19:49:06 GMT
+vary: Save-Data
+x-cache: Hit from cloudfront
+via: 1.1 2bd99b355c72cf29bc2fe3d2d6dc5694.cloudfront.net (CloudFront)
+x-amz-cf-pop: MAD53-P6
+alt-svc: h3=":443"; ma=86400
+x-amz-cf-id: LV8DPTmaAGxKm72vJGSg4gWnbUuAu-90dHER4wsdwz8L8rY5bjAWsw==
+age: 492
+
